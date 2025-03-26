@@ -11,7 +11,8 @@
             background-color: #080808;
             color: #ffffff;
             font-family: 'Press Start 2P', cursive;
-            overflow-x: hidden; /* Prevent horizontal scrollbar */
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         .container {
@@ -49,17 +50,17 @@
             to { opacity: 1; }
         }
         @keyframes pulse {
-          from {
-            transform: scale(1);
-          }
-          to {
-            transform: scale(1.05);
-          }
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.05);
+            }
         }
 
         #splash-title {
             font-size: 2rem;
-            color: #ff8c00; /* Pumpkin orange */
+            color: #ff8c00;
             margin-bottom: 1rem;
             text-shadow: 0 0 8px rgba(255, 140, 0, 0.8);
         }
@@ -94,9 +95,50 @@
 
         /* Main Content Styles */
         #main-content {
-            display: none; /* Initially hidden */
+            display: none;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+        }
+
+        #nav-buttons {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .nav-button {
+            padding: 0.5rem 1rem;
+            font-size: 0.7rem;
+            color: #ffffff;
+            background-color: #333;
+            border: 2px solid #555;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-button:hover {
+            background-color: #555;
+            transform: scale(1.1);
+            border-color: #777;
+        }
+
+        .nav-button:active {
+            background-color: #444;
+            transform: scale(0.9);
+            border-color: #666;
+        }
+
+        #dynamic-content-area {
+            padding-top: 4rem;
+            padding-bottom: 2rem;
+            position: relative;
+            min-height: 100vh;
         }
 
         .game-title {
@@ -105,6 +147,7 @@
             text-align: center;
             margin-bottom: 1rem;
             text-shadow: 0 0 8px rgba(255, 140, 0, 0.8);
+            animation: fadeIn 2s ease;
         }
 
         .description {
@@ -114,10 +157,12 @@
             margin-bottom: 1.5rem;
             padding: 0 1rem;
             line-height: 1.5;
+            animation: fadeIn 2s ease;
         }
 
         .game-mechanics {
             margin-bottom: 1.5rem;
+            animation: fadeIn 2s ease;
         }
 
         .mechanics-title {
@@ -181,6 +226,161 @@
             margin-top: 2rem;
             font-size: 0.7rem;
             color: #ffffff;
+            animation: fadeIn 2s ease;
+        }
+
+        /* 8x8 Pixel Art Styles */
+        .pixel-art {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            -webkit-interpolation-mode: nearest-neighbor;
+            -ms-interpolation-mode: nearest-neighbor;
+            width: 8px;
+            height: 8px;
+            display: inline-block;
+        }
+
+        #pumpkin-pixel {
+            background-color: #ff7f00;
+            border-radius: 2px;
+        }
+
+        #sword-pixel {
+            background-color: #b0c4de;
+            border-top: 1px solid #778899;
+            border-bottom: 1px solid #778899;
+        }
+
+        /* Mini Teaser Styles */
+        #teaser-section {
+            background-color: #1a1a1a;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 1px solid #333;
+            animation: fadeIn 2s ease;
+        }
+
+        #teaser-title {
+            font-size: 1.2rem;
+            color: #ff8c00;
+            margin-bottom: 1rem;
+        }
+
+        #teaser-video {
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: 0 auto 1rem;
+            background-color: #000;
+        }
+
+        .review-box {
+            background-color: #222;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem auto;
+            max-width: 80%;
+            border: 1px solid #444;
+            animation: fadeIn 2s ease;
+        }
+
+        .review-author {
+            font-size: 0.7rem;
+            color: #ddd;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .review-content {
+            font-size: 0.7rem;
+            color: #eee;
+            line-height: 1.4;
+        }
+
+        #secrets-section {
+            margin-top: 2rem;
+            text-align: center;
+            animation: fadeIn 2s ease;
+        }
+
+        #secrets-title {
+            font-size: 1.2rem;
+            color: #ff8c00;
+            margin-bottom: 1rem;
+        }
+
+        #secret-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 80%;
+            font-size: 0.7rem;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        #secret-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        #secret-list li::before {
+            content: '🤫';
+            position: absolute;
+            left: 0;
+        }
+
+        #dungeon-game-container {
+            margin: 2rem auto;
+            text-align: center;
+            max-width: 80%;
+            border: 2px solid #555;
+            border-radius: 0.5rem;
+            background-color: #111;
+            padding: 1rem;
+            display: none;
+            animation: fadeIn 2s ease;
+        }
+
+        #dungeon-game-canvas {
+            border: 2px solid #777;
+            border-radius: 0.5rem;
+            background-color: #222;
+            cursor: pointer;
+        }
+
+        .system-requirements {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #222;
+            border-radius: 0.5rem;
+            border: 1px solid #444;
+            font-size: 0.7rem;
+            color: #eee;
+            line-height: 1.5;
+            animation: fadeIn 2s ease;
+        }
+
+        .system-requirements h2 {
+            font-size: 1.2rem;
+            color: #ff8c00;
+            margin-bottom: 0.5rem;
+        }
+
+        .system-requirements ul {
+            list-style: none;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .system-requirements li::before {
+            content: '•';
+            color: #ff8c00;
+            margin-right: 0.5rem;
         }
 
         @media (min-width: 768px) {
@@ -195,6 +395,15 @@
             .start-button {
                 font-size: 1rem;
                 padding: 0.8rem 2rem;
+            }
+
+            #nav-buttons {
+                gap: 1.5rem;
+            }
+
+            .nav-button {
+                font-size: 0.8rem;
+                padding: 0.6rem 1.2rem;
             }
 
             .game-title {
@@ -215,7 +424,7 @@
                 max-width: 60%;
             }
 
-             .swords-list {
+            .swords-list {
                 font-size: 0.8rem;
                 max-width: 60%;
             }
@@ -228,7 +437,89 @@
             .developers-info {
                 font-size: 0.8rem;
             }
+
+            #teaser-title {
+                font-size: 1.5rem;
+            }
+
+            #teaser-video {
+                max-width: 720px;
+            }
+
+            .review-box {
+                max-width: 60%;
+                font-size: 0.8rem;
+            }
+
+            .review-author {
+                font-size: 0.8rem;
+            }
+
+            .review-content {
+                font-size: 0.8rem;
+            }
+
+            #secrets-title {
+                font-size: 1.5rem;
+            }
+
+            #secret-list {
+                font-size: 0.8rem;
+                max-width: 60%;
+            }
+
+            #dungeon-game-container {
+                max-width: 60%;
+            }
+
+            .system-requirements {
+                font-size: 0.8rem;
+            }
         }
+
+        /* Mouse Animation Styles */
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            background-color: #ff8c00;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            transform-origin: center;
+        }
+
+        #cursor.active {
+            transform: scale(1.5);
+            background-color: #e67800;
+        }
+
+        #cursor.pointer {
+            width: 24px;
+            height: 24px;
+            border-radius: 0;
+            background-color: transparent;
+            border: 3px solid #ff8c00;
+            border-radius: 50%;
+        }
+
+        /* General Animation */
+        .animated-element {
+            animation: fadeIn 1s ease, moveIn 1s ease;
+        }
+
+        @keyframes moveIn {
+            from {
+                transform: translateY(20px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -241,46 +532,109 @@
             </div>
         </div>
         <div id="main-content">
-            <h1 class="game-title">Pumpkin Quest</h1>
-            <p class="description">
-                Tortles has stolen your prize-winning pumpkins! Journey across the land,
-                defeat monsters, and reclaim your pumpkins in time for the big competition.
-            </p>
-
-            <div class="game-mechanics">
-                <h2 class="mechanics-title">Gameplay Mechanics</h2>
-                <ul class="mechanics-list">
-                    <li>Top-down scrolling (16-visual-grid system)</li>
-                    <li>WASD movement, Q to attack, E to interact</li>
-                    <li>Monster-hitting combat with swords</li>
-                    <li>Chests with apples (health) and new swords</li>
-                    <li>Multiple levels with mini-bosses and a final boss</li>
-                    <li>Characters with helpful clues</li>
-                    <li>Three stages: Forest, Cave, Desert</li>
-                    <li>Doors/Portals/Ladders for area transitions</li>
-                </ul>
+            <div id="nav-buttons">
+                <button class="nav-button" data-target="home">Home</button>
+                <button class="nav-button" data-target="game">Game</button>
+                <button class="nav-button" data-target="reviews">Reviews</button>
+                <button class="nav-button" data-target="dungeon">Dungeon</button>
+                <button class="nav-button" data-target="secrets">Secrets</button>
+                <button class="nav-button" data-target="system">System</button>
             </div>
+            <div id="dynamic-content-area">
+                <section id="home-content" class="animated-element">
+                    <h1 class="game-title">Pumpkin Quest</h1>
+                    <p class="description">
+                        Tortles has stolen your prize-winning pumpkins! Journey across the land,
+                        defeat monsters, and reclaim your pumpkins in time for the big competition.
+                    </p>
+                </section>
 
-            <div class="game-mechanics">
-                <h2 class="mechanics-title">Swords</h2>
-                <ul class="swords-list">
-                    <li>Old Wooden Sword (1 damage)</li>
-                    <li>Heavy Stone Sword (3 damage)</li>
-                    <li>Shiny Iron Sword (5 damage)</li>
-                    <li>Sharpened Gold Sword (10 damage)</li>
-                    <li>Crystalised Ruby Sword (25 damage)</li>
-                    <li>Giant Emerald Sword (50 damage)</li>
-                    <li>Shining Diamond Sword (100 damage)</li>
-                </ul>
-            </div>
+                <section id="game-content" class="animated-element" style="display: none;">
+                    <div class="game-mechanics">
+                        <h2 class="mechanics-title">Gameplay Mechanics</h2>
+                        <ul class="mechanics-list">
+                            <li>Top-down scrolling (16-visual-grid system)</li>
+                            <li>WASD movement, Q to attack, E to interact</li>
+                            <li>Monster-hitting combat with swords</li>
+                            <li>Chests with apples (health) and new swords</li>
+                            <li>Multiple levels with mini-bosses and a final boss</li>
+                            <li>Characters with helpful clues</li>
+                            <li>Three stages: Forest, Cave, Desert</li>
+                            <li>Doors/Portals/Ladders for area transitions</li>
+                        </ul>
+                    </div>
 
-            <div class="game-mechanics">
-                <h2 class="mechanics-title">Stages</h2>
-                <ul class="stage-list">
-                    <li>Forest</li>
-                    <li>Cave</li>
-                    <li>Desert</li>
-                </ul>
+                    <div class="game-mechanics">
+                        <h2 class="mechanics-title">Swords</h2>
+                        <ul class="swords-list">
+                            <li>Old Wooden Sword (1 damage)</li>
+                            <li>Heavy Stone Sword (3 damage)</li>
+                            <li>Shiny Iron Sword (5 damage)</li>
+                            <li>Sharpened Gold Sword (10 damage)</li>
+                            <li>Crystalised Ruby Sword (25 damage)</li>
+                            <li>Giant Emerald Sword (50 damage)</li>
+                            <li>Shining Diamond Sword (100 damage)</li>
+                        </ul>
+                    </div>
+
+                    <div class="game-mechanics">
+                        <h2 class="mechanics-title">Stages</h2>
+                        <ul class="stage-list">
+                            <li>Forest</li>
+                            <li>Cave</li>
+                            <li>Desert</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="reviews-content" class="animated-element" style="display: none;">
+                    <h2 class="mechanics-title">Reviews</h2>
+                    <div class="review-box">
+                        <p class="review-author">IGN - 10/10</p>
+                        <p class="review-content">"An absolutely incredible adventure! Pumpkin Quest is a masterpiece with stunning visuals, engaging gameplay, and a heartwarming story.  A perfect 10!"</p>
+                    </div>
+                    <div class="review-box">
+                        <p class="review-author">GameSpot - 10/10</p>
+                        <p class="review-content">"A flawless game.  From the first minute to the last, Pumpkin Quest is a joy to play.  The best game I've played this year."</p>
+                    </div>
+                    <div class="review-box">
+                        <p class="review-author">PC Gamer - 10/10</p>
+                        <p class="review-content">"A true work of art.  Pumpkin Quest sets a new standard for adventure games.  The world is rich, the characters are memorable, and the quest is unforgettable."</p>
+                    </div>
+                </section>
+
+                <section id="dungeon-content" class="animated-element" style="display: none;">
+                    <div id="dungeon-game-container">
+                        <h2 class="mechanics-title">Mini 2D Dungeon Game</h2>
+                        <canvas id="dungeon-game-canvas" width="320" height="240"></canvas>
+                        <p>Use WASD to move. Click to interact.</p>
+                    </div>
+                </section>
+
+                <section id="secrets-content" class="animated-element" style="display: none;">
+                    <h2 id="secrets-title">Fun Secrets and Easter Eggs</h2>
+                    <ul id="secret-list">
+                        <li>Find a hidden room in the cave level for a special sword!</li>
+                        <li>Talk to a specific NPC in the forest to unlock a secret quest.</li>
+                        <li>There's a hidden message in the game's credits.</li>
+                        <li>Collect all the swords to unlock a secret boss fight!</li>
+                    </ul>
+                </section>
+
+                <section id="system-requirements" class="animated-element" style="display: none;">
+                    <div class="system-requirements">
+                        <h2>System Requirements</h2>
+                        <ul>
+                            <li><strong>OS:</strong> Windows 10</li>
+                            <li><strong>Processor:</strong> Intel Core i5 2.5GHz or equivalent</li>
+                            <li><strong>Memory:</strong> 8 GB RAM</li>
+                            <li><strong>Graphics:</strong> NVIDIA GeForce GTX 960 or equivalent</li>
+                            <li><strong>Storage:</strong> 5 GB available space</li>
+                        </ul>
+                        <p><em>Note: These are recommended requirements. The game may run on lower-end systems, but performance may vary.</em></p>
+                    </div>
+                </section>
+
             </div>
 
             <div class="developers-info">
@@ -289,10 +643,85 @@
         </div>
     </div>
 
+    <div id="cursor"></div>
+
     <script>
         const splashScreen = document.getElementById('splash-screen');
         const startGameButton = document.getElementById('start-game');
         const mainContent = document.getElementById('main-content');
+        const navButtons = document.querySelectorAll('.nav-button');
+        const contentAreas = document.querySelectorAll('#dynamic-content-area > section');
+        const cursor = document.getElementById('cursor');
+        const body = document.body;
+        const canvas = document.getElementById('dungeon-game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let currentSection = 'home';
+        let isDragging = false;
+        let startX, startY;
+        let cameraX = 0, cameraY = 0;
+        let playerX = 5, playerY = 5;
+        let gameMap = [
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        ];
+
+        const TILE_SIZE = 32;
+        let animationFrameId;
+
+        document.addEventListener('mousemove', (e) => {
+            let x = e.clientX;
+            let y = e.clientY;
+            cursor.style.left = `${x}px`;
+            cursor.style.top = `${y}px`;
+
+            const interactable = checkInteraction(x, y);
+            if (interactable) {
+                cursor.classList.add('pointer');
+            } else {
+                cursor.classList.remove('pointer');
+            }
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            cursor.classList.add('active');
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('active');
+            isDragging = false;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            let dx = e.clientX - startX;
+            let dy = e.clientY - startY;
+            cameraX += dx;
+            cameraY += dy;
+            startX = e.clientX;
+            startY = e.clientY;
+        });
 
         startGameButton.addEventListener('click', () => {
             splashScreen.classList.add('fade-out');
@@ -300,10 +729,142 @@
                 splashScreen.style.display = 'none';
                 mainContent.style.display = 'block';
                 setTimeout(() => {
-                    mainContent.style.opacity = '1';
+                    mainContent.style.opacity = 1;
+                    animate();
                 }, 10);
             }, 1000);
         });
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const target = event.target.dataset.target;
+                contentAreas.forEach(area => {
+                    area.style.display = 'none';
+                });
+                document.getElementById(`${target}-content`).style.display = 'block';
+                currentSection = target;
+
+                if (target === 'dungeon') {
+                    document.getElementById('dungeon-game-container').style.display = 'block';
+                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                    drawDungeon();
+                    animateDungeon();
+                } else {
+                    document.getElementById('dungeon-game-container').style.display = 'none';
+                    animate();
+                }
+            });
+        });
+
+        function checkInteraction(x, y) {
+            if (currentSection !== 'dungeon') return false;
+
+            const canvasRect = canvas.getBoundingClientRect();
+            const relX = x - canvasRect.left;
+            const relY = y - canvasRect.top;
+
+            const gridX = Math.floor((relX + cameraX) / TILE_SIZE);
+            const gridY = Math.floor((relY + cameraY) / TILE_SIZE);
+
+            if (gridX < 0 || gridX >= gameMap[0].length || gridY < 0 || gridY >= gameMap.length) {
+                return false;
+            }
+
+            if (gameMap[gridY][gridX] === 2 || gameMap[gridY][gridX] === 3) {
+                return true;
+            }
+
+            return false;
+        }
+
+        canvas.addEventListener('click', (e) => {
+            if (currentSection !== 'dungeon') return;
+
+            const canvasRect = canvas.getBoundingClientRect();
+            const relX = e.clientX - canvasRect.left;
+            const relY = e.clientY - canvasRect.top;
+
+            const gridX = Math.floor((relX + cameraX) / TILE_SIZE);
+            const gridY = Math.floor((relY + cameraY) / TILE_SIZE);
+
+            if (gridX < 0 || gridX >= gameMap[0].length || gridY < 0 || gridY >= gameMap.length) {
+                return;
+            }
+
+            if (gameMap[gridY][gridX] === 2) {
+                alert('You found a chest!');
+                gameMap[gridY][gridX] = 0;
+            } else if (gameMap[gridY][gridX] === 3) {
+                alert('You found a hidden door!');
+                gameMap[gridY][gridX] = 0;
+            }
+        });
+
+        function drawDungeon() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const viewWidth = Math.ceil(canvas.width / TILE_SIZE) + 1;
+            const viewHeight = Math.ceil(canvas.height / TILE_SIZE) + 1;
+
+            const startX = Math.floor(cameraX / TILE_SIZE);
+            const startY = Math.floor(cameraY / TILE_SIZE);
+
+            for (let y = 0; y < viewHeight; y++) {
+                for (let x = 0; x < viewWidth; x++) {
+                    const mapX = startX + x;
+                    const mapY = startY + y;
+
+                    if (mapX < 0 || mapX >= gameMap[0].length || mapY < 0 || mapY >= gameMap.length) {
+                        continue;
+                    }
+
+                    const tile = gameMap[mapY][mapX];
+                    let color = '#000';
+
+                    switch (tile) {
+                        case 1: color = '#8b4513'; break;
+                        case 2: color = '#ffd700'; break;
+                        case 3: color = '#00ff00'; break;
+                        case 0:
+                        default:  continue;
+                    }
+
+                    ctx.fillStyle = color;
+                    ctx.fillRect(
+                        (x * TILE_SIZE) - (cameraX % TILE_SIZE),
+                        (y * TILE_SIZE) - (cameraY % TILE_SIZE),
+                        TILE_SIZE,
+                        TILE_SIZE
+                    );
+                }
+            }
+            //draw player
+            ctx.fillStyle = '#ff0000';
+            ctx.fillRect(
+                        (playerX * TILE_SIZE) - cameraX,
+                        (playerY * TILE_SIZE) - cameraY,
+                        TILE_SIZE,
+                        TILE_SIZE
+                    );
+        }
+
+        function animateDungeon() {
+            drawDungeon();
+            animationFrameId = requestAnimationFrame(animateDungeon);
+        }
+
+        function animate() {
+            cursor.style.transform = `translate(-50%, -50%) rotate(${(Date.now() / 10) % 360}deg)`;
+            requestAnimationFrame(animate);
+        }
+
+        body.addEventListener('mouseleave', () => {
+            cursor.style.display = 'none';
+        });
+
+        body.addEventListener('mouseenter', () => {
+            cursor.style.display = 'block';
+        });
+
     </script>
 </body>
 </html>
