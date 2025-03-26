@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pumpkin Quest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #080808;
+            color: #ffffff;
+            font-family: 'Press Start 2P', cursive;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Splash Screen Styles */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #080808;
+            z-index: 1000;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #splash-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #splash-content {
+            text-align: center;
+            animation: fadeIn 2s ease, pulse 2s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+          from {
+            transform: scale(1);
+          }
+          to {
+            transform: scale(1.05);
+          }
+        }
+
+        #splash-title {
+            font-size: 2rem;
+            color: #ff8c00; /* Pumpkin orange */
+            margin-bottom: 1rem;
+            text-shadow: 0 0 8px rgba(255, 140, 0, 0.8);
+        }
+
+        #splash-text {
+            font-size: 0.8rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+        }
+
+        .start-button {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.8rem;
+            color: #ffffff;
+            background-color: #ff8c00;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+        }
+
+        .start-button:hover {
+            background-color: #e67800;
+            transform: scale(1.1);
+        }
+
+        .start-button:active {
+            background-color: #d06300;
+            transform: scale(0.9);
+        }
+
+        /* Main Content Styles */
+        #main-content {
+            display: none; /* Initially hidden */
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .game-title {
+            font-size: 2rem;
+            color: #ff8c00;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 8px rgba(255, 140, 0, 0.8);
+        }
+
+        .description {
+            font-size: 0.8rem;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+            line-height: 1.5;
+        }
+
+        .game-mechanics {
+            margin-bottom: 1.5rem;
+        }
+
+        .mechanics-title {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .mechanics-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 80%;
+            font-size: 0.7rem;
+        }
+
+        .mechanics-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .mechanics-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #ff8c00;
+        }
+
+        .swords-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 80%;
+            font-size: 0.7rem;
+            text-align: center;
+        }
+
+        .swords-list li {
+            margin-bottom: 0.25rem;
+            color: #ffffff;
+        }
+
+        .stage-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 80%;
+            font-size: 0.7rem;
+            text-align: center;
+        }
+
+        .stage-list li {
+            margin-bottom: 0.25rem;
+            color: #ffffff;
+        }
+
+        .developers-info {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #ffffff;
+        }
+
+        @media (min-width: 768px) {
+            #splash-title {
+                font-size: 3rem;
+            }
+
+            #splash-text {
+                font-size: 1rem;
+            }
+
+            .start-button {
+                font-size: 1rem;
+                padding: 0.8rem 2rem;
+            }
+
+            .game-title {
+                font-size: 3rem;
+            }
+
+            .description {
+                font-size: 1rem;
+                padding: 0 20%;
+            }
+
+            .mechanics-title {
+                font-size: 1.5rem;
+            }
+
+            .mechanics-list {
+                font-size: 0.8rem;
+                max-width: 60%;
+            }
+
+             .swords-list {
+                font-size: 0.8rem;
+                max-width: 60%;
+            }
+
+            .stage-list {
+                font-size: 0.8rem;
+                max-width: 60%;
+            }
+
+            .developers-info {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="splash-screen">
+            <div id="splash-content">
+                <h1 id="splash-title">Pumpkin Quest</h1>
+                <p id="splash-text">A 2D Adventure Game</p>
+                <button class="start-button" id="start-game">Start Quest</button>
+            </div>
+        </div>
+        <div id="main-content">
+            <h1 class="game-title">Pumpkin Quest</h1>
+            <p class="description">
+                Tortles has stolen your prize-winning pumpkins! Journey across the land,
+                defeat monsters, and reclaim your pumpkins in time for the big competition.
+            </p>
+
+            <div class="game-mechanics">
+                <h2 class="mechanics-title">Gameplay Mechanics</h2>
+                <ul class="mechanics-list">
+                    <li>Top-down scrolling (16-visual-grid system)</li>
+                    <li>WASD movement, Q to attack, E to interact</li>
+                    <li>Monster-hitting combat with swords</li>
+                    <li>Chests with apples (health) and new swords</li>
+                    <li>Multiple levels with mini-bosses and a final boss</li>
+                    <li>Characters with helpful clues</li>
+                    <li>Three stages: Forest, Cave, Desert</li>
+                    <li>Doors/Portals/Ladders for area transitions</li>
+                </ul>
+            </div>
+
+            <div class="game-mechanics">
+                <h2 class="mechanics-title">Swords</h2>
+                <ul class="swords-list">
+                    <li>Old Wooden Sword (1 damage)</li>
+                    <li>Heavy Stone Sword (3 damage)</li>
+                    <li>Shiny Iron Sword (5 damage)</li>
+                    <li>Sharpened Gold Sword (10 damage)</li>
+                    <li>Crystalised Ruby Sword (25 damage)</li>
+                    <li>Giant Emerald Sword (50 damage)</li>
+                    <li>Shining Diamond Sword (100 damage)</li>
+                </ul>
+            </div>
+
+            <div class="game-mechanics">
+                <h2 class="mechanics-title">Stages</h2>
+                <ul class="stage-list">
+                    <li>Forest</li>
+                    <li>Cave</li>
+                    <li>Desert</li>
+                </ul>
+            </div>
+
+            <div class="developers-info">
+                <p>Developed by tortenotorteno, bluestripee, and someo_N_E</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const splashScreen = document.getElementById('splash-screen');
+        const startGameButton = document.getElementById('start-game');
+        const mainContent = document.getElementById('main-content');
+
+        startGameButton.addEventListener('click', () => {
+            splashScreen.classList.add('fade-out');
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+                setTimeout(() => {
+                    mainContent.style.opacity = '1';
+                }, 10);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
